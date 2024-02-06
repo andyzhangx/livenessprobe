@@ -12,10 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM gcr.io/distroless/static:latest
+FROM gcr.io/distroless/static:nonroot
 LABEL maintainers="Kubernetes Authors"
 LABEL description="CSI Driver liveness probe"
 ARG binary=./bin/livenessprobe
 
 COPY ${binary} /livenessprobe
+USER nonroot:nonroot
 ENTRYPOINT ["/livenessprobe"]
